@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Kind Person💖</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD */
+.container {
+  position: absolute;
+  background: rgba(255,255,255,0.9);
+  padding: 40px;
+  width: 330px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  animation: fadeIn 1s ease;
+}
+
+h1 {
+  color: #e75480;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  min-height: 60px;
+}
+
+button {
+  margin-top: 20px;
+  background: #e75480;
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #d63c6c;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* HEART ANIMATION */
+.heart {
+  position: absolute;
+  top: -20px;
+  color: #ff4d6d;
+  font-size: 18px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) scale(0.6);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- CARD 1 -->
+<div class="container" id="card1">
+  <h1>Hi my ex 💕</h1>
+  <p>I made this just for you</p>
+  <button onclick="start()">Start demo</button>
+</div>
+
+<!-- CARD 2 -->
+<div class="container hidden" id="card2">
+  <h1>Happy Birthday 🎉</h1>
+  <p id="typing"></p>
+</div>
+
+<script>
+const text = 
+`Hari ini bukan hari biasa.
+Ini hari di mana seseorang yang sangat spesial lahir ke dunia.
+
+Semoga senyummu selalu ada,
+dan semoga aku bisa jadi bagian
+dari senyum itu 💖`;
+
+let index = 0;
+
+function start() {
+  document.getElementById("card1").classList.add("hidden");
+  document.getElementById("card2").classList.remove("hidden");
+  typeText();
+  createHearts();
+}
+
+function typeText() {
+  if (index < text.length) {
+    document.getElementById("typing").innerHTML +=
+      text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
+    index++;
+    setTimeout(typeText, 50);
+  }
+}
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
